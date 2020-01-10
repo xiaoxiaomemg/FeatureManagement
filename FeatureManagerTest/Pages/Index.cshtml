@@ -1,0 +1,30 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+@using Microsoft.FeatureManagement
+@inject IFeatureManager FeatureManager
+@addTagHelper *,Microsoft.FeatureManagement.AspNetCore
+@{ 
+    ViewData["Title"] = "Home Page";
+}
+
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+        <feature name="NewFeatureFlag" requirement="All">
+            <a asp-action="NewFeature"> Go to the new feature</a>
+        </feature>
+        <feature name="RandomFlag">
+            <h2>I am a random flag! Guess when will I show up!</h2>
+        </feature>
+        <feature name="TimeFeatureFlag">
+            <h2>I will go when the time out!</h2>
+        </feature>
+        <p>@DateTimeOffset.UtcNow.ToString()</p>
+
+        <feature name="BrowserFeatureFlag">
+            <p>You can see me only on Edge</p>
+        </feature>
+    </div>
